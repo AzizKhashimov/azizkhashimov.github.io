@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aziz Khashimov – Software Developer</title>
+<meta name="description" content="Aziz Khashimov, software developer with a background in HCI: AR, VR and interactive exhibitions.">
+<link rel="stylesheet" href="fonts.css">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#0e0e11; --surface:#151519; --text:#ececef; --text-2:#c6c6cc; --muted:#8f8f99; --line:#26262c;
+  --accent:#5fc7be;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:64px; --s9:96px;
+  --radius:12px; --gutter:24px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:80px}
+[tabindex="-1"]:focus{outline:none}
+body{background:var(--bg);color:var(--text);font:16px/1.65 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","IBM Plex Sans",sans-serif;font-weight:600;line-height:1.2;letter-spacing:-.01em;text-wrap:balance}
+p{text-wrap:pretty}
+a{color:inherit}
+img{display:block;max-width:100%}
+ul,ol{list-style:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 var(--gutter)}
+@media (max-width:600px){:root{--gutter:16px}}
+.mono{font-family:var(--mono);font-size:.8rem;color:var(--muted);letter-spacing:0}
+
+/* nav */
+nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:60px}
+nav .brand{font-weight:600;text-decoration:none}
+nav ul{display:flex;gap:var(--s6)}
+nav ul a{text-decoration:none;color:var(--muted);font-size:.92rem}
+nav ul a:hover{color:var(--text)}
+@media (max-width:600px){nav ul{gap:var(--s5)} nav ul li:nth-child(3){display:none}}
+@media (max-width:480px){nav .brand .ln{display:none}}
+
+/* hero */
+/* full-width hero clips its ambient light sideways: anything wider than the screen makes mobile Chrome lay out the whole page wider */
+.hero{position:relative;overflow-x:clip}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--s8);align-items:start;padding-top:var(--s9);padding-bottom:var(--s8)}
+.hero::before{content:"";position:absolute;z-index:-1;left:calc(50% + 40px);top:-80px;width:720px;height:720px;pointer-events:none;background:radial-gradient(circle,color-mix(in srgb,var(--accent) 13%,transparent),transparent 62%)}
+.hero h1{font-size:clamp(2.8rem,6.5vw,4.75rem);font-weight:700;letter-spacing:-.015em;line-height:1}
+.lead em{font-style:normal;color:var(--accent)}
+.lead{font-size:clamp(1.1rem,1.8vw,1.3rem);line-height:1.6;color:var(--text-2);max-width:32em;margin-top:var(--s5)}
+.status{display:inline-flex;align-items:center;gap:var(--s3);margin-top:var(--s5);padding:6px 14px 6px 12px;border:1px solid var(--line);border-radius:999px;color:var(--text-2)}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 60%,transparent);animation:ping 2.4s ease-out infinite}
+@keyframes ping{70%,100%{box-shadow:0 0 0 7px transparent}}
+.cta{display:flex;gap:var(--s3);flex-wrap:wrap;margin-top:var(--s6)}
+.btn{display:inline-flex;align-items:center;height:44px;padding:0 var(--s5);border-radius:8px;text-decoration:none;font-weight:500;font-size:.95rem;border:1px solid var(--line);transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.btn.primary:hover{background:color-mix(in srgb,var(--accent) 85%,#fff)}
+.portrait{position:relative;width:260px;margin:0 var(--s3) var(--s3) 0}
+.portrait::before{content:"";position:absolute;inset:var(--s3) calc(-1 * var(--s3)) calc(-1 * var(--s3)) var(--s3);border:2px solid var(--accent);border-radius:var(--radius)}
+.portrait img{position:relative;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 25%;border-radius:var(--radius)}
+@media (max-width:820px){
+  .hero-grid{grid-template-columns:1fr;gap:var(--s6);padding-top:var(--s8)}
+  .hero::before{left:calc(100% - 300px);top:-300px}
+  .portrait{order:-1;width:140px}
+}
+
+/* sections */
+section{padding:var(--s7) 0 var(--s8)}
+.section-head{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s4);padding-bottom:var(--s4);margin-bottom:var(--s7);border-bottom:1px solid var(--line)}
+.section-head h2{font-size:clamp(1.5rem,2.6vw,1.85rem)}
+.section-head .mono{white-space:nowrap}
+.section-head+.note{margin:calc(-1 * var(--s6)) 0 var(--s6)}
+.note a{color:var(--text-2)}
+.note a:hover{color:var(--accent)}
+
+/* project cards */
+.projects{display:grid;gap:var(--s5)}
+.row-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s5)}
+.row-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s5)}
+@media (max-width:960px){.row-3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:700px){.row-2,.row-3{grid-template-columns:1fr}}
+.card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);transition:box-shadow .35s,border-color .35s}
+.media{aspect-ratio:16/9;background:#000;flex-shrink:0;overflow:hidden;border-radius:calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0}
+.media iframe,.media img{width:100%;height:100%;border:0;object-fit:cover}
+.yt{position:relative;display:block;width:100%;height:100%;padding:0;border:0;background:#000;cursor:pointer}
+.yt img{transition:filter .3s}
+/* outline play button: ring + triangle in accent over a light dark tint; z-index keeps it above the img, which becomes its own layer while its hover filter is active */
+.yt::before,.yt::after{content:"";position:absolute;z-index:1;left:50%;top:50%;transform:translate(-50%,-50%);transition:transform .2s;filter:drop-shadow(0 1px 6px rgba(0,0,0,.6))}
+.yt::after{width:64px;height:64px;border:2px solid var(--accent);border-radius:50%;background:rgba(14,14,17,.35)}
+.yt::before{z-index:2;width:0;height:0;margin-left:3px;border-left:20px solid var(--accent);border-top:12px solid transparent;border-bottom:12px solid transparent}
+.yt:hover img{filter:brightness(.8)}
+.yt:hover::before,.yt:hover::after{transform:translate(-50%,-50%) scale(1.08)}
+.yt:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.body{display:flex;flex-direction:column;flex:1;padding:var(--s5) var(--s6) var(--s6)}
+.kicker{margin-bottom:var(--s3)}
+.kicker span{color:var(--accent);margin-right:var(--s3)}
+.body h3{font-size:1.25rem;margin-bottom:var(--s3)}
+.body>p:not(.mono){color:var(--text-2);font-size:.95rem}
+.foot{display:flex;flex-direction:column;gap:var(--s4);margin-top:auto;padding-top:var(--s5)}
+.foot::before{content:"";border-top:1px solid var(--line);margin-bottom:var(--s1)}
+.foot-row{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:var(--s2) var(--s4)}
+.ext{font-size:.9rem;color:var(--accent);text-decoration:none;white-space:nowrap}
+.ext:hover{text-decoration:underline;text-underline-offset:3px}
+.awards{display:flex;flex-direction:column;gap:var(--s3)}
+.awards li{display:flex;align-items:center;gap:var(--s3);font-size:.85rem;color:var(--muted);line-height:1.4}
+.awards img{width:40px;height:40px;flex-shrink:0;object-fit:contain;background:#fff;border-radius:8px;padding:5px}
+.awards img.dark{background:#1c1c22;border:1px solid var(--line)}
+.awards b{display:block;color:var(--text);font-weight:500}
+.card.featured{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}
+.card.featured .media{aspect-ratio:auto;min-height:320px;border-radius:calc(var(--radius) - 1px) 0 0 calc(var(--radius) - 1px)}
+.card.featured .body{padding:var(--s6)}
+@media (max-width:860px){.card.featured{grid-template-columns:1fr} .card.featured .media{aspect-ratio:16/9;min-height:0;border-radius:calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0}}
+@media (max-width:600px){.body,.card.featured .body{padding:var(--s5)}}
+
+/* experience */
+.cv{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:var(--s8)}
+@media (max-width:860px){.cv{grid-template-columns:1fr;gap:var(--s7)}}
+.cv h3{font-size:.95rem;font-weight:500;color:var(--muted);margin-bottom:var(--s5)}
+.entries li{position:relative;padding:0 0 var(--s6) var(--s6)}
+.entries li:last-child{padding-bottom:0}
+.entries li::before{content:"";position:absolute;left:0;top:7px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.entries li:not(:last-child)::after{content:"";position:absolute;left:3px;top:22px;bottom:6px;width:1px;background:var(--line)}
+.entries h4{font-size:1.1rem;margin-top:var(--s2)}
+.entries .org{color:var(--muted);font-size:.95rem}
+.entries p.desc{color:var(--text-2);font-size:.95rem;margin-top:var(--s3)}
+.entries .mono:last-child:not(:first-child){margin-top:var(--s3)}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s4)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:var(--s5)}
+@media (max-width:960px){.skills{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.skills{grid-template-columns:1fr}}
+.skills dt{font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+.skills dd{color:var(--text-2);margin-bottom:var(--s4)}
+.skills dd:last-child{margin-bottom:0}
+
+/* beyond work + contact */
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s4)}
+@media (max-width:700px){.duo{grid-template-columns:1fr}}
+.panel h3{font-size:1.05rem;margin-bottom:var(--s4)}
+.panel p:not(.mono){color:var(--text-2)}
+.panel .mono+p{margin-top:var(--s1)}
+.contact{display:flex;justify-content:space-between;align-items:center;gap:var(--s5) var(--s7);flex-wrap:wrap;padding:var(--s6)}
+.contact .lead{margin:0;max-width:25em}
+.contact .cta{margin:0}
+
+/* backlight glow on project cards and skill panels: follows the pointer, strongest on the edge nearest to it */
+.card,.panel{position:relative}
+@media (hover:hover){
+  .card::before,.panel::before{content:"";position:absolute;inset:-16px;z-index:-1;border-radius:calc(var(--radius) + 16px);pointer-events:none;
+    background:radial-gradient(360px circle at calc(var(--mx,50%) + 16px) calc(var(--my,50%) + 16px),var(--accent),transparent 70%);
+    filter:blur(28px);opacity:0;transition:opacity .35s}
+  .card::after,.panel::after{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;pointer-events:none;
+    background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),var(--accent),transparent 70%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+    opacity:0;transition:opacity .35s}
+  .card:hover::before,.panel:hover::before{opacity:.55}
+  .card:hover::after,.panel:hover::after{opacity:1}
+  /* a playing video (cross-origin iframe) hides the pointer position: crossfade to an even all-round glow instead of freezing */
+  .card:has(iframe:hover)::before,.card:has(iframe:hover)::after{opacity:0}
+  .card:has(iframe:hover){box-shadow:0 0 44px -4px color-mix(in srgb,var(--accent) 45%,transparent);border-color:color-mix(in srgb,var(--accent) 55%,var(--line))}
+}
+
+footer{border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--s3);padding-top:var(--s5);padding-bottom:var(--s5);color:var(--muted);font-size:.85rem}
+footer .links{display:flex;gap:var(--s5)}
+footer a{text-decoration:none}
+footer a:hover{color:var(--text)}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="#">Aziz<span class="ln"> Khashimov</span></a>
+  <ul>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</div></nav>
+
+<header class="hero"><div class="wrap hero-grid">
+  <div>
+    <h1>Aziz Khashimov</h1>
+    <p class="lead">Software developer with a background in human-computer interaction. I like building software that is <em>fun to use</em>: AR navigation for museums, VR prototypes and two interactive exhibitions, both award-winning.</p>
+    <p class="status mono"><i></i>Open for work</p>
+    <div class="cta">
+      <a class="btn primary" href="#projects">See projects</a>
+      <a class="btn" href="mailto:aziz.khashimov@outlook.com">Email me</a>
+    </div>
+  </div>
+  <div class="portrait"><img src="img/portrait.png" alt="Portrait of Aziz Khashimov" width="800" height="800"></div>
+</div></header>
+
+<section id="projects"><div class="wrap">
+  <div class="section-head"><h2>Selected projects</h2><span class="mono">2021 – 2024</span></div>
+  <p class="note mono">Videos are embedded from YouTube and only load when you press play. <a href="datenschutz.html#youtube">Datenschutz</a></p>
+  <div class="projects">
+
+    <article class="card featured">
+      <div class="media"><button class="yt" data-id="PAN7VxCOb70" data-title="AR Navigation for Museum Environments" aria-label="Play video: AR Navigation for Museum Environments"><img src="img/yt-PAN7VxCOb70.jpg" alt="" loading="lazy"></button></div>
+      <div class="body">
+        <p class="kicker mono"><span>01</span>Master's thesis, solo</p>
+        <h3>AR Navigation for Museum Environments</h3>
+        <p>For my master's thesis I built an indoor navigation app for museums that combines a classic map with AR directions shown right in the room. Tracking uses Vuforia Area Targets made from a Matterport scan of the building. I compared several navigation techniques in a study that ran in the museum during regular opening hours.</p>
+        <div class="foot"><p class="mono">Unity (C#), Vuforia, Matterport, Android</p></div>
+      </div>
+    </article>
+
+    <div class="row-2">
+      <article class="card">
+        <div class="media"><button class="yt" data-id="mVkMf0qojK0" data-title="Youtopia" aria-label="Play video: Youtopia"><img src="img/yt-mVkMf0qojK0.jpg" alt="" loading="lazy"></button></div>
+        <div class="body">
+          <p class="kicker mono"><span>02</span>Exhibition, team</p>
+          <h3>Youtopia</h3>
+          <p>An exhibition about urban utopias. I was on the build side: I set up the optical scanners (a Raspberry Pi with up to three cameras each) that read every visitor's companion object, installed the VR station and kept the exhibition running until it closed.</p>
+          <div class="foot">
+            <ul class="awards">
+              <li><img src="img/adc-bronze-2024.png" alt="ADC logo"><span><b>ADC Talent Award 2024</b>Exhibition, Bronze</span></li>
+              <li><img src="img/commawards-2023.png" alt="CommAwards Silver logo"><span><b>CommAwards 2023</b>Talent Exhibition, Silver</span></li>
+            </ul>
+            <div class="foot-row"><p class="mono">Unity (C#), Python, Raspberry Pi</p><a class="ext" href="https://youtopia-konstanz.de/" target="_blank" rel="noopener">youtopia-konstanz.de ↗</a></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="media"><button class="yt" data-id="n504hW-Rkqc" data-title="Stayin' Alive" aria-label="Play video: Stayin' Alive"><img src="img/yt-n504hW-Rkqc.jpg" alt="" loading="lazy"></button></div>
+        <div class="body">
+          <p class="kicker mono"><span>03</span>Exhibition, team</p>
+          <h3>Stayin' Alive</h3>
+          <p>An interactive exhibition about pandemics in Konstanz. I worked on the concept: the technical setup and the interaction design, with wireframes and click-through prototypes for an AR layer that runs through the whole exhibition.</p>
+          <div class="foot">
+            <ul class="awards">
+              <li><img src="img/reddot-2022.png" alt="Red Dot logo"><span><b>Red Dot 2022</b>Spatial Communication</span></li>
+              <li><img src="img/adc-gold-2022.png" alt="ADC logo"><span><b>ADC Talent Award 2022</b>Exhibition, Gold</span></li>
+              <li><img class="dark" src="img/commawards-2021.png" alt="CommAwards logo"><span><b>CommAwards 2021</b>Space, Gold</span></li>
+            </ul>
+            <div class="foot-row"><p class="mono">Wireframing, Prototyping, Figma</p><a class="ext" href="https://stayin-alive.info/" target="_blank" rel="noopener">stayin-alive.info ↗</a></div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="row-3">
+      <article class="card">
+        <div class="media"><img src="img/gamejam.png" alt="Screenshot of the game jam prototype" loading="lazy"></div>
+        <div class="body">
+          <p class="kicker mono"><span>04</span>Game jam, team</p>
+          <h3>Gaming and Dis/Ability</h3>
+          <p>A game jam I helped organize at the University of Konstanz. My team made a co-op game that children with visual or hearing impairments can play together. I co-designed the interaction and gameplay and wrote most of the prototype.</p>
+          <div class="foot"><div class="foot-row"><p class="mono">Unity (C#)</p><a class="ext" href="https://www.gamelab.uni-konstanz.de/news/aktuelles/ankuendigung-gamejam-der-universitaet-konstanz-im-maerz-2024/" target="_blank" rel="noopener">Article (German) ↗</a></div></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="media"><button class="yt" data-id="dcpiaoUxE8g" data-title="VR Escape Room" aria-label="Play video: VR Escape Room"><img src="img/yt-dcpiaoUxE8g.jpg" alt="" loading="lazy"></button></div>
+        <div class="body">
+          <p class="kicker mono"><span>05</span>Course project, 2 people</p>
+          <h3>VR Escape Room</h3>
+          <p>A small escape room for the Quest 2, built with a classmate around several 3D manipulation techniques we implemented for a course on interaction in mixed reality.</p>
+          <div class="foot"><p class="mono">Unity (C#), Quest 2</p></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="media"><button class="yt" data-id="bs5JrEk2OOI" data-title="Minimaps in VR" aria-label="Play video: Minimaps in VR"><img src="img/yt-bs5JrEk2OOI.jpg" alt="" loading="lazy"></button></div>
+        <div class="body">
+          <p class="kicker mono"><span>06</span>Course project, solo</p>
+          <h3>Minimaps in VR</h3>
+          <p>What can HCI research borrow from video games? I built 2D and 3D minimaps in VR, inspired by games and sci-fi films, plus a small horde shooter to give the maps something to show.</p>
+          <div class="foot"><p class="mono">Unity (C#), VR</p></div>
+        </div>
+      </article>
+    </div>
+
+  </div>
+</div></section>
+
+<section id="experience"><div class="wrap">
+  <div class="section-head"><h2>Experience &amp; education</h2><span class="mono">2017 – today</span></div>
+  <div class="cv">
+    <div>
+      <h3>Work</h3>
+      <ol class="entries">
+        <li>
+          <p class="mono">2025 – 2026</p>
+          <h4>Software Developer</h4>
+          <p class="org">CMC-Kiesel GmbH, Hechingen</p>
+          <p class="desc">Full-stack application development, web services, machine learning and AI-assisted software development.</p>
+          <p class="mono">Unity (C#), C#/.NET, Python, Claude Code</p>
+        </li>
+        <li>
+          <p class="mono">2023 – 2024</p>
+          <h4>Research Assistant</h4>
+          <p class="org">University of Konstanz, two positions in parallel</p>
+          <p class="desc">Kept the interactive exhibition YOUTOPIA running and improved it, analysed and visualised data for publications, and helped plan and run lectures.</p>
+          <p class="mono">Unity (C#), Python, Plotly, Raspberry Pi</p>
+        </li>
+        <li>
+          <p class="mono">2022</p>
+          <h4>Software Developer Intern (Front-End)</h4>
+          <p class="org">i-SOLUTIONS Health GmbH, Düsseldorf</p>
+          <p class="desc">UI/UX improvements in the front end and further development of DevExtreme controls.</p>
+          <p class="mono">C#/.NET, Blazor, HTML, CSS, JavaScript</p>
+        </li>
+      </ol>
+    </div>
+    <div>
+      <h3>Education</h3>
+      <ol class="entries">
+        <li>
+          <p class="mono">2022 – 2024</p>
+          <h4>M.Sc. Computer and Information Science</h4>
+          <p class="org">University of Konstanz</p>
+          <p class="desc">Focus on interactive systems. Thesis: <em>Comparing Hybrid Navigation Techniques for Handheld Augmented Reality in Museum Environments</em>.</p>
+        </li>
+        <li>
+          <p class="mono">2017 – 2021</p>
+          <h4>B.Sc. Information Engineering</h4>
+          <p class="org">University of Konstanz</p>
+          <p class="desc">Focus on interactive systems. Thesis: <em>SPOT</em>, an app for detecting physical objects during mixed reality studies.</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+</div></section>
+
+<section id="skills"><div class="wrap">
+  <div class="section-head"><h2>Skills</h2></div>
+  <div class="skills">
+    <div class="panel"><h3>Development</h3><dl>
+      <dt>Expert</dt><dd>C#/.NET, Unity, Claude Code</dd>
+      <dt>Proficient</dt><dd>Java, Kotlin, Python, HTML&nbsp;&amp;&nbsp;CSS</dd>
+      <dt>Basics</dt><dd>C, C++, SQL</dd>
+    </dl></div>
+    <div class="panel"><h3>UX &amp; Design</h3><dl>
+      <dt>Methods</dt><dd>Concept design, wireframing, prototyping, user and expert studies</dd>
+      <dt>Tools</dt><dd>Figma</dd>
+    </dl></div>
+    <div class="panel"><h3>XR &amp; Hardware</h3><dl>
+      <dt>Expert</dt><dd>AR, VR</dd>
+      <dt>Basics</dt><dd>Unreal Engine, Godot, Arduino, Raspberry Pi</dd>
+    </dl></div>
+    <div class="panel"><h3>Languages</h3><dl>
+      <dt>Native</dt><dd>German</dd>
+      <dt>Fluent</dt><dd>English (C1)</dd>
+      <dt>Other</dt><dd>Latin (Latinum)</dd>
+    </dl></div>
+  </div>
+</div></section>
+
+<section id="beyond"><div class="wrap">
+  <div class="section-head"><h2>Beyond work</h2></div>
+  <div class="duo">
+    <div class="panel"><h3>Volunteering</h3>
+      <p class="mono">2022 – 2024</p>
+      <p>Ran the trading card game meetup at the youth centre in Konstanz.</p>
+    </div>
+    <div class="panel"><h3>Interests</h3>
+      <p>Board games and video games, game design, sci-fi and fantasy, psychology, escape rooms and puzzles, and cooking.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="contact"><div class="wrap">
+  <div class="section-head"><h2>Contact</h2></div>
+  <div class="panel contact">
+    <p class="lead">Open for work. Whether it's a role, a project or a question about my work, feel free to get in touch.</p>
+    <div class="cta">
+      <a class="btn primary" href="mailto:aziz.khashimov@outlook.com">aziz.khashimov@outlook.com</a>
+      <a class="btn" href="https://www.linkedin.com/in/aziz-khashimov/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <span>© <span id="y"></span> Aziz Khashimov</span>
+  <div class="links"><a href="datenschutz.html">Datenschutz</a><a href="mailto:aziz.khashimov@outlook.com">Email</a><a href="https://www.linkedin.com/in/aziz-khashimov/" target="_blank" rel="noopener">LinkedIn</a></div>
+</div></footer>
+<script>
+document.getElementById('y').textContent=new Date().getFullYear();
+document.querySelectorAll('.yt').forEach(b=>b.addEventListener('click',()=>{
+  const f=document.createElement('iframe');
+  f.src='https://www.youtube-nocookie.com/embed/'+b.dataset.id+'?autoplay=1';
+  f.title=b.dataset.title;
+  f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';
+  f.allowFullscreen=true;
+  b.replaceWith(f);
+}));
+document.querySelectorAll('.card,.panel').forEach(el=>el.addEventListener('pointermove',e=>{
+  const r=el.getBoundingClientRect();
+  el.style.setProperty('--mx',e.clientX-r.left+'px');
+  el.style.setProperty('--my',e.clientY-r.top+'px');
+}));
+// in-page links scroll in JS: Chrome disables CSS smooth scrolling when the OS has animations turned off
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+  const id=a.getAttribute('href'), el=id==='#'?null:document.querySelector(id);
+  if(id!=='#'&&!el)return;
+  e.preventDefault();
+  const start=scrollY, end=el?el.getBoundingClientRect().top+scrollY-80:0, dist=end-start;
+  const dur=Math.min(900,350+Math.abs(dist)/5), t0=performance.now();
+  const step=now=>{
+    const p=Math.min(1,(now-t0)/dur), k=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2; // easeInOutCubic
+    scrollTo({top:start+dist*k,behavior:'instant'});
+    if(p<1)requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+  history.pushState(null,'',el?id:location.pathname+location.search);
+  if(el){el.setAttribute('tabindex','-1');el.focus({preventScroll:true});} // keep keyboard focus in sync
+}));
+</script>
+</body>
+</html>
