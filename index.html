@@ -106,7 +106,7 @@ nav ul a[aria-current]::after{scale:1}
 
 /* hero: a massif in three depths. It may stand behind the intro (its fills are close to the page colour), the summit sits
    right of the middle, under the portrait. While the intro scrolls away, the mountains sink behind the clouds */
-.scene-sky>.mt{bottom:calc(-1 * var(--d));height:calc(min(66%,48vw) + var(--d))}
+.scene-sky>.mt{bottom:calc(-1 * var(--d));height:calc(min(66%,48vw) + var(--d));overflow:visible}
 .mt-far{--d:36px;--sink:200px}.mt-mid{--d:22px;--sink:120px}.mt-near{--d:10px;--sink:56px}
 .mt .edge{fill:none;stroke:var(--edge);stroke-width:1.5;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 .mt-far .edge{stroke:color-mix(in srgb,var(--accent) 14%,transparent)}
