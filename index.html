@@ -141,19 +141,25 @@ nav ul a[aria-current]::after{scale:1}
 /* dividers: one narrow strip between two sections, on the upper section's tint, its front shape ends in the lower one's */
 .dv{position:relative;height:190px;overflow:clip;pointer-events:none}
 .dv>*{position:absolute;left:-40px;width:calc(100% + 80px);bottom:0;height:100%;translate:calc(var(--px,0) * var(--d,0px)) 0}
-.dv-forest{background:var(--bg)}
+/* the forest strip clips only sideways, so the fireflies' halos are not cut off at its top and bottom */
+.dv-forest{background:var(--bg);overflow:visible;overflow-x:clip}
 .dv-forest>.back{--d:22px;--rise:30px}
 .dv-forest>.front{--d:8px}
-.dv-forest>.forest-flies{top:auto;--d:14px;opacity:.15;transition:opacity 1.2s;mask-image:linear-gradient(transparent,#000 56px,#000 calc(100% - 44px),transparent)}
+.dv-forest>.forest-flies{top:auto;--d:14px;opacity:.15;transition:opacity 1.2s}
 .dv-forest.lit>.forest-flies{opacity:1}
-.dv-forest>.forest-flies i{box-shadow:0 0 8px 2px color-mix(in srgb,var(--accent) 50%,transparent);transition:scale 1.2s,box-shadow 1.2s}
+/* lighting up only changes opacity and scale, which the compositor does alone: the wide halo is a second, ready-made shadow
+   that fades in (a mask on the layer and an animated box-shadow made phones flicker) */
+.dv-forest>.forest-flies i{box-shadow:0 0 8px 2px color-mix(in srgb,var(--accent) 50%,transparent);transition:scale 1.2s}
+.dv-forest>.forest-flies i::after{content:"";position:absolute;inset:0;border-radius:50%;opacity:0;transition:opacity 1.2s;
+  box-shadow:0 0 8px 2.5px color-mix(in srgb,var(--accent) 75%,transparent),0 0 21px 7px color-mix(in srgb,var(--accent) 26%,transparent)}
+.dv-forest.lit>.forest-flies i::after{opacity:1}
 /* lit: every dot twice the size with a wide halo, and it no longer fades out between its pulses */
-.dv-forest.lit>.forest-flies i{scale:2;opacity:.8;box-shadow:0 0 16px 5px color-mix(in srgb,var(--accent) 75%,transparent),0 0 42px 14px color-mix(in srgb,var(--accent) 26%,transparent)}
+.dv-forest.lit>.forest-flies i{scale:2;opacity:.8}
 @media (prefers-reduced-motion:no-preference){.dv-forest.lit>.forest-flies i{animation:fly var(--t) ease-in-out var(--dl) infinite alternate,glow-lit var(--g) ease-in-out var(--dl) infinite}}
 @keyframes glow-lit{0%,100%{opacity:.5}45%,55%{opacity:1}}
 .dv-water{--air:100px;--sea:160px;height:calc(var(--sea) + var(--air));margin-top:calc(-1 * var(--air));background:linear-gradient(transparent var(--air),#0f1819 var(--air))}
 .dv-water>i{left:-1000px;width:calc(100% + 2000px);bottom:-8px;height:var(--sea);background:var(--w) 0 0/960px 100% repeat-x;translate:none;--to:960px}
-.dv-water>.fish{left:var(--x);width:38px;height:17px;top:calc(var(--air) + var(--sea) * .8);bottom:auto;translate:none;--up:-128px}
+.dv-water>.fish{left:var(--x);width:38px;height:17px;top:calc(var(--air) + var(--sea) * .8);bottom:auto;translate:none;opacity:0;--up:-128px}
 .dv-water>.fish>svg{display:block;width:100%;height:100%;fill:#2b5964;overflow:visible}
 .dv-water>.f1{--x:27%;--t:11s;--dl:-2s;--dx:-110px}
 .dv-water>.f2{--x:66%;--t:17s;--dl:-7s;--dx:-140px;--up:-146px;scale:-1 1}
@@ -176,7 +182,7 @@ nav ul a[aria-current]::after{scale:1}
      sideways, the fish up and down and turns along the arc). A mirrored wrapper jumps the other way */
   .dv-water>.fish{animation:hop-x var(--t) linear var(--dl) infinite}
   .dv-water>.fish>svg{animation:hop-y var(--t) linear var(--dl) infinite}
-  @keyframes hop-x{0%,92%{transform:none}100%{transform:translateX(var(--dx))}}
+  @keyframes hop-x{0%,91.9%{transform:none;opacity:0}92%{transform:none;opacity:1}99.6%{opacity:1}100%{transform:translateX(var(--dx));opacity:0}}
   @keyframes hop-y{0%,92%{translate:0 0;rotate:42deg;animation-timing-function:cubic-bezier(.2,.6,.4,1)}96%{translate:0 var(--up);rotate:0deg;animation-timing-function:cubic-bezier(.6,0,.8,.4)}100%{translate:0 0;rotate:-42deg}}
   @keyframes drift{to{transform:translateX(var(--to,480px))}}
   /* depth while scrolling: the back row of the forest rises a little slower than the page */
